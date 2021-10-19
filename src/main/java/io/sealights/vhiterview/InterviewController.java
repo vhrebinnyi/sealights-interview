@@ -3,7 +3,8 @@ package io.sealights.vhiterview;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/exercise")
+@RestController
+@RequestMapping("/exercise")
 @Log
 public class InterviewController {
 
@@ -14,12 +15,12 @@ public class InterviewController {
         this.interviewService = interviewService;
     }
 
-    @PostMapping("{queueName}")
+    @PostMapping("/{queueName}")
     public void enqueue(@PathVariable("queueName") String queueName, @RequestBody String payload) {
         interviewService.enqueue(queueName, payload);
     }
 
-    @GetMapping("{queueName}")
+    @GetMapping("/{queueName}")
     public String dequeue(@PathVariable("queueName") String queueName) {
         return interviewService.dequeue(queueName);
     }
